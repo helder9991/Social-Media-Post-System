@@ -29,6 +29,6 @@
         "class-methods-use-this": "off",
         "no-unused-vars": "warn",
         "no-useless-constructor":"off",
-        "no-empty-function":"warn"
+        "no-empty-function": "off"
     }
 }
