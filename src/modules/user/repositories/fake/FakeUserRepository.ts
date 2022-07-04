@@ -44,7 +44,8 @@ class FakeUserRepository implements IUserRepository {
 
   async update({ id, email, name }: IUpdateUserDTO): Promise<User> {
     const updatedUser = new User();
-    Object.assign({
+
+    Object.assign(updatedUser, {
       id,
       email,
       name,
