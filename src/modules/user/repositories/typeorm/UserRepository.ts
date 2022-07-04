@@ -60,6 +60,16 @@ class UserRepository implements IUserRepository {
 
     return updatedUser;
   }
+
+  async delete(id: string): Promise<boolean> {
+    const user = await this.repository.delete({
+      id,
+    });
+
+    const deleted = user.affected === 1;
+
+    return deleted;
+  }
 }
 
 export { UserRepository };
