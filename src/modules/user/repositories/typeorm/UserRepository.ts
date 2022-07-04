@@ -1,5 +1,6 @@
 import { Repository } from 'typeorm';
 import { v4 } from 'uuid';
+import { IUpdateUserDTO } from '../../dtos/IUpdateUserDTO';
 import { connection } from '../../../../database/typeorm';
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
 import { User } from '../../entities/User';
@@ -22,6 +23,14 @@ class UserRepository implements IUserRepository {
     await this.repository.save(user);
 
     return user;
+  }
+
+  async list(): Promise<User[]> {
+    const users = this.repository.find({
+      select: ['name', 'email'],
+    });
+
+    return users;
   }
 
   findByEmail(email: string): Promise<User | null | undefined> {

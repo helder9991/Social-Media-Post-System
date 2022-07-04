@@ -1,5 +1,6 @@
 import { v4 } from 'uuid';
 
+import { IUpdateUserDTO } from '../../dtos/IUpdateUserDTO';
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
 import { User } from '../../entities/User';
 import { IUserRepository } from '../interfaces/IUserRepository';
@@ -21,10 +22,34 @@ class FakeUserRepository implements IUserRepository {
     return user;
   }
 
+  async list(): Promise<User[]> {
+    const { users } = this;
+
+    return users;
+  }
+
   async findByEmail(email: string): Promise<User | null | undefined> {
     const userExists = this.users.find((user) => user.email === email);
 
     return userExists;
+  }
+
+  async findById(id: string): Promise<User | null | undefined> {
+    const userExists = this.users.find((user) => user.id === id);
+
+    return userExists;
+  }
+
+  async update({ id, email, name }: IUpdateUserDTO): Promise<User> {
+    const updatedUser = {
+      id,
+      email,
+      name,
+    };
+
+    this.users = this.users.map((user) => (user.id === id ? updatedUser : user));
+
+    return updatedUser;
   }
 }
 
