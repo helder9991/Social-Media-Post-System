@@ -33,7 +33,7 @@ class UpdatePostController {
 
     await updatePostUseCase.execute({ id, userId, description, title });
 
-    return res.status(201).json({ id, description, title });
+    return res.status(200).json({ id, description, title });
   }
 }
 

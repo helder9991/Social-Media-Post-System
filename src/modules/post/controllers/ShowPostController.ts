@@ -27,7 +27,7 @@ class CreatePostController {
 
     const { userId, description, title } = await showPostUseCase.execute({ id });
 
-    return res.status(201).json({ id, userId, description, title });
+    return res.status(200).json({ id, userId, description, title });
   }
 }
 

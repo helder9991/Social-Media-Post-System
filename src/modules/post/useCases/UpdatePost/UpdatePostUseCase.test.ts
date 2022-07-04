@@ -13,7 +13,7 @@ let createPost: CreatePostUseCase;
 let createUser: CreateUserUseCase;
 let updatePost: UpdatePostUseCase;
 
-describe('updatePost', () => {
+describe('UpdatePost', () => {
   let user: User;
   let post: Post;
 
