@@ -47,4 +47,9 @@ describe('ShowPost', () => {
       }),
     );
   });
+
+  it('Should not be able to show a non existing post', async () => {
+    expect(showPost.execute({ id: 'non-existing-id' }))
+      .rejects.toHaveProperty('message', 'Post not found');
+  });
 });
