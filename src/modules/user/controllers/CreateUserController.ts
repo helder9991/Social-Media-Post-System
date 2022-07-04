@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 
 import { AppError } from '../../../util/AppError';
 import { CreateUserUseCase } from '../useCases/CreateUser/CreateUserUseCase';
+import { trimObjectValues } from '../../../util/trimObjectValues';
 
 class CreateUserController {
   private schema;
@@ -16,7 +17,9 @@ class CreateUserController {
   }
 
   async handle(req: Request, res: Response): Promise<Response> {
-    const { name, email } = req.body;
+    let { name, email } = req.body;
+
+    ({ name, email } = trimObjectValues({ name, email }));
 
     if (!(await this.schema.isValid({ name, email }))) throw new AppError('Validation Fails', 400);
 
