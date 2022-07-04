@@ -12,8 +12,6 @@ export default function handleErrors(
       mensagem: err.message,
     });
   }
-
-  console.log('err dasdaskldmnaskldnaslk');
   console.log(err);
 
   return res.status(500).json({
