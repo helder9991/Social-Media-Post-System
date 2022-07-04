@@ -1,5 +1,7 @@
 interface IAuhtenticateUserDTO {
-    id: string;
+  id: string;
+  password: string;
+  recivedPassword: string;
 }
 
 export { IAuhtenticateUserDTO };

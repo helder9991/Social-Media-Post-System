@@ -16,7 +16,7 @@ class FakeUserRepository implements IUserRepository {
       id: v4(),
       name,
       email,
-      password: hash(password, 8),
+      password: await hash(password, 8),
     });
 
     this.users.push(user);
@@ -43,11 +43,12 @@ class FakeUserRepository implements IUserRepository {
   }
 
   async update({ id, email, name }: IUpdateUserDTO): Promise<User> {
-    const updatedUser = {
+    const updatedUser = new User();
+    Object.assign({
       id,
       email,
       name,
-    };
+    });
 
     this.users = this.users.map((user) => (user.id === id ? updatedUser : user));
 

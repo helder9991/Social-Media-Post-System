@@ -22,7 +22,12 @@ class AuthenticateUserUseCase {
 
     if (!user) throw new AppError('User not found', 400);
 
-    const { token } = this.authenticateRepository.create({ id: user.id });
+    const { token } = await this.authenticateRepository.create({
+      id: user.id,
+      password: user.password,
+      recivedPassword: password
+    });
+
     return { token };
   }
 }

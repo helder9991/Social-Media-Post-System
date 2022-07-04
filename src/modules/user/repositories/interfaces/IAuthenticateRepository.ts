@@ -6,7 +6,7 @@ interface IToken {
 }
 
 interface IAuthenticateRepository {
-  create(data: IAuhtenticateUserDTO): IToken;
+  create(data: IAuhtenticateUserDTO): Promise<IToken>;
 }
 
 export { IAuthenticateRepository, IToken };

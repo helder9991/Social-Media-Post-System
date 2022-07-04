@@ -36,6 +36,6 @@ describe('AuthenticateUser', () => {
 
   it('Should not be able to authenticate in the application with a wrong password', async () => {
     expect(authenticateUser.execute({ email: 'john@mail.com', password: 'wrong-password' }))
-      .rejects.toHaveProperty('message', 'Login or password invalid');
+      .rejects.toHaveProperty('message', 'Login or password is invalid');
   });
 });
