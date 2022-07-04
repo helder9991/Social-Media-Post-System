@@ -18,9 +18,11 @@ export default function ensureAuthenticated(
 
   const { sub } = decoded;
 
-  req.user = {
-    id: sub,
-  };
+  if (typeof (sub) === 'string') {
+    req.user = {
+      id: sub,
+    };
+  }
 
   next();
 }

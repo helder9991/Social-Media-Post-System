@@ -1,5 +1,5 @@
 interface IUser {
-  id: string | undefined | (() => string)
+  id: string
 }
 declare namespace Express {
   interface Request {
