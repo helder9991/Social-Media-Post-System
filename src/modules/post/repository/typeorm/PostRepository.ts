@@ -3,6 +3,7 @@ import { v4 } from "uuid";
 
 import { connection } from "../../../../database/typeorm";
 import { ICreatePostDTO } from "../../dtos/ICreatePostDTO";
+import { IUpdatePostDTO } from "../../dtos/IUpdatePostDTO";
 import { Post } from "../../entities/Post";
 import { IPostRepository } from "../interface/IPostRepository";
 
@@ -32,6 +33,16 @@ class PostRepository implements IPostRepository {
     });
 
     return postExists
+  }
+
+  async update({ id, title, description }: IUpdatePostDTO): Promise<Post> {
+    const updatedUser = await this.repository.save({
+      id,
+      title,
+      description,
+    });
+
+    return updatedUser;
   }
 }
 
