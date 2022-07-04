@@ -26,6 +26,13 @@ class PostRepository implements IPostRepository {
     return post;
   }
 
+  async show(id: string): Promise<Post | null | undefined> {
+    const postExists = this.repository.findOneBy({
+      id
+    });
+
+    return postExists
+  }
 }
 
 export { PostRepository }

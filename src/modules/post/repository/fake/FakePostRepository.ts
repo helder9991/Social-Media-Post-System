@@ -21,6 +21,12 @@ class FakePostRepository implements IPostRepository {
 
     return post;
   }
+
+  async show(id: string): Promise<Post | null | undefined> {
+    const postExists = this.posts.find(post => post.id === id);
+
+    return postExists
+  }
 }
 
 export { FakePostRepository };
