@@ -18,6 +18,8 @@ class DeleteUserController {
   async handle(req: Request, res: Response): Promise<Response> {
     let { id } = req.params;
 
+    if (id !== req.user.id) throw new AppError('Not authorized', 401);
+
     ({ id } = trimObjectValues({ id }));
 
     if (!(await this.schema.isValid({ id }))) throw new AppError('Validation Fails', 400);

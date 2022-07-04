@@ -1,4 +1,5 @@
 import { v4 } from 'uuid';
+import { hash } from 'bcryptjs';
 
 import { IUpdateUserDTO } from '../../dtos/IUpdateUserDTO';
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
@@ -8,13 +9,14 @@ import { IUserRepository } from '../interfaces/IUserRepository';
 class FakeUserRepository implements IUserRepository {
   users: Array<User> = [];
 
-  async create({ name, email }: ICreateUserDTO): Promise<User> {
+  async create({ name, email, password }: ICreateUserDTO): Promise<User> {
     const user = new User();
 
     Object.assign(user, {
       id: v4(),
       name,
       email,
+      password: hash(password, 8),
     });
 
     this.users.push(user);

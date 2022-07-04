@@ -21,6 +21,8 @@ class UpdateUserController {
     let { id } = req.params;
     let { name, email } = req.body;
 
+    if (id !== req.user.id) throw new AppError('Not authorized', 401);
+
     ({ id, name, email } = trimObjectValues({ id, name, email }));
 
     if (!(await this.schema.isValid({ id, name, email }))) throw new AppError('Validation Fails', 400);

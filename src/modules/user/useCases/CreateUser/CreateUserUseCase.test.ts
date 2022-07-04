@@ -15,6 +15,7 @@ describe('CreateUser', () => {
     const user = await createUser.execute({
       name: 'John',
       email: 'john@mail.com',
+      password: 'password',
     });
 
     expect(user).toHaveProperty('id');
@@ -24,11 +25,13 @@ describe('CreateUser', () => {
     await createUser.execute({
       name: 'John 1',
       email: 'john@mail.com',
+      password: 'password',
     });
 
     expect(createUser.execute({
       name: 'John 2',
       email: 'john@mail.com',
+      password: 'password',
     })).rejects.toHaveProperty('message', 'This user already exists');
   });
 });

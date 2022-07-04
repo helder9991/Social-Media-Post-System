@@ -18,11 +18,13 @@ describe('ListUsers', () => {
     await createUser.execute({
       name: 'John 1',
       email: 'john1@mail.com',
+      password: 'password',
     });
 
     await createUser.execute({
       name: 'John 2',
       email: 'john2@mail.com',
+      password: 'password',
     });
 
     const users = await listUsers.execute();

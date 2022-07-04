@@ -1,5 +1,6 @@
 import { Repository } from 'typeorm';
 import { v4 } from 'uuid';
+import { hash } from 'bcryptjs';
 import { IUpdateUserDTO } from '../../dtos/IUpdateUserDTO';
 import { connection } from '../../../../database/typeorm';
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
@@ -13,11 +14,12 @@ class UserRepository implements IUserRepository {
     this.repository = connection.getRepository(User);
   }
 
-  async create({ email, name }: ICreateUserDTO): Promise<User> {
+  async create({ email, name, password }: ICreateUserDTO): Promise<User> {
     const user = this.repository.create({
       id: v4(),
       name,
       email,
+      password: await hash(password, 8),
     });
 
     await this.repository.save(user);
@@ -38,6 +40,7 @@ class UserRepository implements IUserRepository {
       where: {
         email,
       },
+      select: ['id', 'name', 'email', 'password'],
     });
 
     return user;

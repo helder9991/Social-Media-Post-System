@@ -18,6 +18,7 @@ describe('UpdateUser', () => {
     const newUser = await createUser.execute({
       name: 'John 1',
       email: 'john@mail.com',
+      password: 'password',
     });
 
     const users = await updateUser.execute({

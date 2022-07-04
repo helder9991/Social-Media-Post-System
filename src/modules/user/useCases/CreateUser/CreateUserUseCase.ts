@@ -6,6 +6,7 @@ import { IUserRepository } from '../../repositories/interfaces/IUserRepository';
 interface ICreateUserParams {
   email: string;
   name: string;
+  password: string;
 }
 
 @injectable()
@@ -15,12 +16,12 @@ class CreateUserUseCase {
     private userRepository: IUserRepository,
   ) { }
 
-  async execute({ email, name }: ICreateUserParams): Promise<User> {
+  async execute({ email, name, password }: ICreateUserParams): Promise<User> {
     const userExists = await this.userRepository.findByEmail(email);
 
     if (userExists) throw new AppError('This user already exists', 400);
 
-    const user = await this.userRepository.create({ email, name });
+    const user = await this.userRepository.create({ email, name, password });
 
     return user;
   }

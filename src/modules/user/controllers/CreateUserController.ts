@@ -13,18 +13,19 @@ class CreateUserController {
     this.schema = Yup.object().shape({
       name: Yup.string().required(),
       email: Yup.string().email().required(),
+      password: Yup.string().min(6).required(),
     });
   }
 
   async handle(req: Request, res: Response): Promise<Response> {
-    let { name, email } = req.body;
+    let { name, email, password } = req.body;
 
-    ({ name, email } = trimObjectValues({ name, email }));
+    ({ name, email, password } = trimObjectValues({ name, email, password }));
 
-    if (!(await this.schema.isValid({ name, email }))) throw new AppError('Validation Fails', 400);
+    if (!(await this.schema.isValid({ name, email, password }))) throw new AppError('Validation Fails', 400);
 
     const createUserUseCase: CreateUserUseCase = container.resolve(CreateUserUseCase);
-    await createUserUseCase.execute({ name, email });
+    await createUserUseCase.execute({ name, email, password });
 
     return res.status(201).json({ name, email });
   }

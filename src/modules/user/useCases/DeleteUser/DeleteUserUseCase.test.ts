@@ -14,10 +14,11 @@ describe('DeleteUser', () => {
     deleteUser = new DeleteUserUseCase(fakeUserRepository);
   });
 
-  it('Should be able to delete a existing user', async () => {
+  it('Should be able to delete an existing user', async () => {
     const { id } = await createUser.execute({
       name: 'John 1',
       email: 'john1@mail.com',
+      password: 'password',
     });
 
     const deletedUser = await deleteUser.execute({ id });
