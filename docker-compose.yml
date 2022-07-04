@@ -1,21 +1,19 @@
 version: "3.7"
 
-services: 
-    db:
-        image: postgres 
-        container_name: contacts
-        restart: always
-        ports:
-            - 5432:5432
-        environment:
-            - POSTGRES_USER=root
-            - POSTGRES_PASSWORD=docker
-            - POSTGRES_DB=contacts
-        volumes:
-            - pgdata:/data/postgres
+services:
+  db:
+    image: postgres
+    container_name: social
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=social
+    volumes:
+      - pgdata:/data/postgres
 
 volumes:
-    pgdata:
-        driver: local
-
-        
+  pgdata:
+    driver: local
