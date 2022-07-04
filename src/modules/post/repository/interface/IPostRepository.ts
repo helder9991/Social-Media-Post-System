@@ -7,6 +7,7 @@ interface IPostRepository {
   create(data: ICreatePostDTO): Promise<Post>;
   show(id: string): Promise<Post | null | undefined>;
   update(data: IUpdatePostDTO): Promise<Post>;
+  delete(id: string): Promise<boolean>;
 }
 
 export { IPostRepository };

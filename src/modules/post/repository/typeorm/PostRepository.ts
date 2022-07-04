@@ -44,6 +44,16 @@ class PostRepository implements IPostRepository {
 
     return updatedUser;
   }
+
+  async delete(id: string): Promise<boolean> {
+    const post = await this.repository.delete({
+      id,
+    });
+
+    const deleted = post.affected === 1;
+
+    return deleted;
+  }
 }
 
 export { PostRepository }

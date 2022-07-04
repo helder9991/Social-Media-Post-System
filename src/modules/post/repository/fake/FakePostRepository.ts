@@ -42,6 +42,15 @@ class FakePostRepository implements IPostRepository {
 
     return updatedPost;
   }
+
+  async delete(id: string): Promise<boolean> {
+    const newPostsList = this.posts.filter((post) => post.id !== id);
+    const deleted = newPostsList < this.posts;
+
+    this.posts = newPostsList;
+
+    return deleted;
+  }
 }
 
 export { FakePostRepository };
