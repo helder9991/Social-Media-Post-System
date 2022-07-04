@@ -42,6 +42,24 @@ class UserRepository implements IUserRepository {
 
     return user;
   }
+
+  async findById(id: string): Promise<User | null | undefined> {
+    const userExists = this.repository.findOneBy({
+      id,
+    });
+
+    return userExists;
+  }
+
+  async update({ id, email, name }: IUpdateUserDTO): Promise<User> {
+    const updatedUser = await this.repository.save({
+      id,
+      email,
+      name,
+    });
+
+    return updatedUser;
+  }
 }
 
 export { UserRepository };
