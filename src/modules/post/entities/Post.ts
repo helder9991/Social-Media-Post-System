@@ -21,6 +21,9 @@ class Post {
 
   @Column()
   description: string;
+
+  @Column()
+  url?: string;
 }
 
 export { Post };

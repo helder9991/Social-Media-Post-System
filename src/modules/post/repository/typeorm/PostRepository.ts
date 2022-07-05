@@ -4,6 +4,7 @@ import { v4 } from "uuid";
 import { connection } from "../../../../database/typeorm";
 import { ICreatePostDTO } from "../../dtos/ICreatePostDTO";
 import { IUpdatePostDTO } from "../../dtos/IUpdatePostDTO";
+import { IUploadPostImageDTO } from "../../dtos/IUploadPostImageDTO";
 import { Post } from "../../entities/Post";
 import { IPostRepository } from "../interface/IPostRepository";
 
@@ -40,6 +41,17 @@ class PostRepository implements IPostRepository {
       id,
       title,
       description,
+    });
+
+    return updatedUser;
+  }
+
+  async updateImage({ id, userId, url }: IUploadPostImageDTO): Promise<Post> {
+    console.log(url)
+    const updatedUser = await this.repository.save({
+      id,
+      userId,
+      url
     });
 
     return updatedUser;

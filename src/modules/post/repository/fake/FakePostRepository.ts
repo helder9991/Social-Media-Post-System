@@ -1,6 +1,7 @@
 import { v4 } from 'uuid';
 import { ICreatePostDTO } from '../../dtos/ICreatePostDTO';
 import { IUpdatePostDTO } from '../../dtos/IUpdatePostDTO';
+import { IUploadPostImageDTO } from '../../dtos/IUploadPostImageDTO';
 
 import { Post } from '../../entities/Post';
 import { IPostRepository } from '../interface/IPostRepository';
@@ -38,7 +39,22 @@ class FakePostRepository implements IPostRepository {
       description,
     });
 
-    this.posts = this.posts.map((user) => (user.id === id ? { ...user, ...updatedPost } : user));
+    this.posts = this.posts.map((post) => (post.id === id ? { ...post, ...updatedPost } : post));
+
+    return updatedPost;
+  }
+
+  async updateImage({ id, userId, url, key }: IUploadPostImageDTO): Promise<Post> {
+    const updatedPost = new Post();
+
+    Object.assign(updatedPost, {
+      id,
+      userId,
+      url,
+      key
+    });
+
+    this.posts = this.posts.map((post) => (post.id === id ? { ...post, ...updatedPost } : post));
 
     return updatedPost;
   }
