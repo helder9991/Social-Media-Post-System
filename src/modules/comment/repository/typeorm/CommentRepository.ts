@@ -3,6 +3,7 @@ import { v4 } from "uuid";
 
 import { connection } from "../../../../database/typeorm";
 import { ICreateCommentDTO } from "../../dtos/ICreateCommentDTO";
+import { IUpdateCommentDTO } from "../../dtos/IUpdateCommentDTO";
 import { Comment } from "../../entities/Comment";
 import { ICommentRepository } from "../interface/ICommentRepository";
 
@@ -29,6 +30,15 @@ class CommentRepository implements ICommentRepository {
   async show(id: string): Promise<Comment | null | undefined> {
     const comment = await this.repository.findOneBy({
       id
+    });
+
+    return comment;
+  }
+
+  async update({ id, description }: IUpdateCommentDTO): Promise<Comment> {
+    const comment = await this.repository.save({
+      id,
+      description,
     });
 
     return comment;
