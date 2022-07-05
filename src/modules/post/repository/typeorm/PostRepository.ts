@@ -37,24 +37,24 @@ class PostRepository implements IPostRepository {
   }
 
   async update({ id, title, description }: IUpdatePostDTO): Promise<Post> {
-    const updatedUser = await this.repository.save({
+    const updatedPost = await this.repository.save({
       id,
       title,
       description,
     });
 
-    return updatedUser;
+    return updatedPost;
   }
 
   async updateImage({ id, userId, url, key }: IUploadPostImageDTO): Promise<Post> {
-    const updatedUser = await this.repository.save({
+    const updatedPost = await this.repository.save({
       id,
       userId,
       url,
       key
     });
 
-    return updatedUser;
+    return updatedPost;
   }
 
   async delete(id: string): Promise<boolean> {
