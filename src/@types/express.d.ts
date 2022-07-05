@@ -1,8 +1,15 @@
 interface IUser {
-  id: string | undefined | (() => string)
+  id: string
 }
+
+interface IFile {
+  location: string;
+  key: string;
+}
+
 declare namespace Express {
   interface Request {
     user: IUser
+    file: IFile
   }
 }

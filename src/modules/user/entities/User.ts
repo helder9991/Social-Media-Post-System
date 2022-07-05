@@ -2,6 +2,7 @@
 import {
   Column, Entity, OneToMany, PrimaryColumn,
 } from 'typeorm';
+import { Post } from '../../post/entities/Post';
 
 @Entity('users')
 class User {
@@ -16,6 +17,9 @@ class User {
 
   @Column({ select: false })
   password: string;
+
+  @OneToMany(() => Post, (post) => post.user)
+  posts: Post[];
 }
 
 export { User };
