@@ -6,7 +6,12 @@ import { ICreatePostDTO } from "../../dtos/ICreatePostDTO";
 import { IUpdatePostDTO } from "../../dtos/IUpdatePostDTO";
 import { IUploadPostImageDTO } from "../../dtos/IUploadPostImageDTO";
 import { Post } from "../../entities/Post";
-import { IPostRepository } from "../interface/IPostRepository";
+import { IPostRepository, PostReport } from "../interface/IPostRepository";
+
+interface ReportData {
+  title: string;
+  commentariesnum: number;
+}
 
 class PostRepository implements IPostRepository {
   repository: Repository<Post>;
@@ -65,6 +70,22 @@ class PostRepository implements IPostRepository {
     const deleted = post.affected === 1;
 
     return deleted;
+  }
+
+  async showReport(): Promise<PostReport[]> {
+    const data: Array<ReportData> = await connection.query(`
+      SELECT p.title, COUNT(c.id) commentariesNum
+      FROM posts p
+      LEFT JOIN "comments" c ON c."postId" = p.id
+      GROUP BY p.id
+    `);
+
+    const report: PostReport[] = data.map((value) => ({
+      title: value.title,
+      commentariesNum: Number(value.commentariesnum)
+    }));
+
+    return report;
   }
 }
 

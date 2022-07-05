@@ -4,7 +4,7 @@ import { IUpdatePostDTO } from '../../dtos/IUpdatePostDTO';
 import { IUploadPostImageDTO } from '../../dtos/IUploadPostImageDTO';
 
 import { Post } from '../../entities/Post';
-import { IPostRepository } from '../interface/IPostRepository';
+import { IPostRepository, PostReport } from '../interface/IPostRepository';
 
 class FakePostRepository implements IPostRepository {
   posts: Array<Post> = [];
@@ -66,6 +66,16 @@ class FakePostRepository implements IPostRepository {
     this.posts = newPostsList;
 
     return deleted;
+  }
+
+  async showReport(): Promise<PostReport[]> {
+    // Por limitacaoes do metodo in-memory nao foi desenvolvido este teste
+    const postReport: PostReport = {
+      title: '',
+      commentariesNum: 1
+    };
+
+    return [postReport]
   }
 }
 
