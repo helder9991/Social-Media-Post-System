@@ -26,7 +26,7 @@ class ShowCommentController {
 
     const { description, postId, userId, deletedBy } = await showCommentUseCase.execute({ id });
 
-    return res.status(201).json({ id, description, postId, userId, deletedBy });
+    return res.status(200).json({ id, description, postId, userId, deletedBy });
   }
 }
 
