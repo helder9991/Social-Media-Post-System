@@ -22,6 +22,12 @@ class FakeCommentRepository implements ICommentRepository {
     return comment;
   }
 
+  async show(id: string): Promise<Comment | null | undefined> {
+    const commentExists = this.comments.find(comment => comment.id === id);
+
+    return commentExists
+  }
+
 
 }
 

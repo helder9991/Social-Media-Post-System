@@ -25,6 +25,14 @@ class CommentRepository implements ICommentRepository {
 
     return comment;
   }
+
+  async show(id: string): Promise<Comment | null | undefined> {
+    const comment = await this.repository.findOneBy({
+      id
+    });
+
+    return comment;
+  }
 }
 
 export { CommentRepository }
