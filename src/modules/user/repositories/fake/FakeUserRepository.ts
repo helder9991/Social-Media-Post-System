@@ -44,14 +44,14 @@ class FakeUserRepository implements IUserRepository {
 
   async update({ id, email, name }: IUpdateUserDTO): Promise<User> {
     const updatedUser = new User();
-    Object.assign(updatedUser, {
+    Object.assign({
       id,
       email,
       name,
     });
 
     this.users = this.users.map((user) => (user.id === id ? updatedUser : user));
-    console.log(updatedUser)
+
     return updatedUser;
   }
 
