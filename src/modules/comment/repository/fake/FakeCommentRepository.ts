@@ -1,5 +1,7 @@
 import { v4 } from 'uuid';
+import { FakeUserRepository } from '../../../user/repositories/fake/FakeUserRepository';
 import { ICreateCommentDTO } from '../../dtos/ICreateCommentDTO';
+import { IDeleteCommentDTO } from "../../dtos/IDeleteCommentDTO";
 import { IUpdateCommentDTO } from '../../dtos/IUpdateCommentDTO';
 
 import { Comment } from '../../entities/Comment';
@@ -37,9 +39,22 @@ class FakeCommentRepository implements ICommentRepository {
       description,
     });
 
-    this.comments = this.comments.map((post) => (post.id === id ? { ...post, ...updatedComment } : post));
+    this.comments = this.comments.map((comment) => (comment.id === id ? { ...comment, ...updatedComment } : comment));
 
     return updatedComment;
+  }
+
+  async delete({ id, deletedBy }: IDeleteCommentDTO): Promise<boolean> {
+    const updatedComment = new Comment();
+
+    Object.assign(updatedComment, {
+      id,
+      deletedBy,
+    });
+
+    this.comments = this.comments.map((comment) => (comment.id === id ? { ...comment, ...updatedComment } : comment));
+
+    return true;
   }
 
 }

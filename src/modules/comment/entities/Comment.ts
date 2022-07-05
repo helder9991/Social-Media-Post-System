@@ -2,7 +2,7 @@
 import {
   Column, Entity, JoinColumn, ManyToOne, PrimaryColumn,
 } from 'typeorm';
-import { User } from '../../user/entities/User';
+import { Post } from '../../post/entities/Post';
 
 @Entity('comments')
 class Comment {

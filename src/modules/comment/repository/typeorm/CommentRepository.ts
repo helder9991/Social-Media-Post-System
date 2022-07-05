@@ -3,6 +3,7 @@ import { v4 } from "uuid";
 
 import { connection } from "../../../../database/typeorm";
 import { ICreateCommentDTO } from "../../dtos/ICreateCommentDTO";
+import { IDeleteCommentDTO } from "../../dtos/IDeleteCommentDTO";
 import { IUpdateCommentDTO } from "../../dtos/IUpdateCommentDTO";
 import { Comment } from "../../entities/Comment";
 import { ICommentRepository } from "../interface/ICommentRepository";
@@ -42,6 +43,15 @@ class CommentRepository implements ICommentRepository {
     });
 
     return comment;
+  }
+
+  async delete({ id, deletedBy }: IDeleteCommentDTO): Promise<boolean> {
+    await this.repository.save({
+      id,
+      deletedBy
+    });
+
+    return true;
   }
 }
 
