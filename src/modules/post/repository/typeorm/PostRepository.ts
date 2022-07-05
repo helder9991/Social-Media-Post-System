@@ -47,7 +47,6 @@ class PostRepository implements IPostRepository {
   }
 
   async updateImage({ id, userId, url }: IUploadPostImageDTO): Promise<Post> {
-    console.log(url)
     const updatedUser = await this.repository.save({
       id,
       userId,
