@@ -1,0 +1,1425 @@
+{
+	"info": {
+		"_postman_id": "c5ea5b27-909c-4308-81d2-c0f1b163deb9",
+		"name": "API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12036505"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Create Authenticate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"anna@mail.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth"
+							]
+						},
+						"description": "Rota utilizada para realizar o login do usuário no sistema, onde o retorno será o token JWT. No corpo da requisição é necessário enviar um e-mail e uma senha com no mínimo 6 dígitos.\n\n| **Status Code** | **Mensagem** | **Significado** |\n| --- | --- | --- |\n| 201 | Token | Login realizado com sucesso |\n| 400 | User not found | O e-mail enviado não pertence a nenhum usuário |\n| 400 | Login or password is invalid | A senha digitada não condiz com a senha salva no banco de dados |\n| 400 | Validation Fails | E-mail ou senha inválidos |"
+					},
+					"response": [
+						{
+							"name": "Create Authenticate",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"john@mail.com\",\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "200"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c8-HH7eFcd6pWkO506sBYG7V2mtS+I\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Jul 2022 03:42:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTY5OTI1MjgsImV4cCI6MTY1NzA3ODkyOCwic3ViIjoiYTQ4NTk0ODEtMzdhMy00ODc3LTg3NTMtOTRjNjhmMTNlYmRlIn0.8jMmUCxQ5iKuLWurK8h7_0yPwpYXQMgjUJ21SFrbLVM\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "Create Comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTcwMDAzMjksImV4cCI6MTY1NzA4NjcyOSwic3ViIjoiZjhkYWU0YzMtOWNjNi00YjVhLTg2M2UtMzNmYWMyOWZmYTFhIn0.8VEY3SRuGwTNhIz5rmWW3JDHy3LAggBHrOyqgGfQiYQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"postId\": \"907e7787-f265-4633-be11-c482be795307\",\r\n    \"description\": \"Comment description\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/comment",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"comment"
+							]
+						},
+						"description": "Rota utilizada para a criação de um comentário enviando o id do post e o comentário.\n\n**Precisa estar autenticado**\n\n| **Status Code** | **Mensagem** | **Significado** |\n| --- | --- | --- |\n| 201 | userId, postId, description | Comentario criado com sucesso |\n| 400 | Validation Fails | O Id do usuário, id do post ou a descrição estão inválidos |\n| 400 | Post not found | Post não encontrado |\n| 401 | Not authorized | Token inválido |"
+					},
+					"response": [
+						{
+							"name": "Create Comment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"166a3e5f-bab4-46f3-a178-aae920bcabe6\",\r\n    \"description\": \"Comment description\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/comment",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"comment"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "133"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"85-axju+5lAgJuckDurQiz9zAXk9TU\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Jul 2022 05:53:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": \"f8dae4c3-9cc6-4b5a-863e-33fac29ffa1a\",\n    \"postId\": \"166a3e5f-bab4-46f3-a178-aae920bcabe6\",\n    \"description\": \"Comment description\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTcwMDAzMjksImV4cCI6MTY1NzA4NjcyOSwic3ViIjoiZjhkYWU0YzMtOWNjNi00YjVhLTg2M2UtMzNmYWMyOWZmYTFhIn0.8VEY3SRuGwTNhIz5rmWW3JDHy3LAggBHrOyqgGfQiYQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Comment description updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/comment/597b3902-4789-4fd8-b297-70cf474d81c7",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"comment",
+								"597b3902-4789-4fd8-b297-70cf474d81c7"
+							]
+						},
+						"description": "Rota utilizada para a atualização de um comentário, enviando o comentário da URL e a descrição no corpo da requisição.\n\n**Precisa estar autenticado**\n\n| **Status Code** | **Mensagem** | **Significado** |\n| --- | --- | --- |\n| 200 | id, description, postId, userId | Comentário atualizado com sucesso |\n| 400 | Validation Fails | O id do comentário ou a descrição estão inválidos |\n| 400 | Comment not found | Comentario não encontrado |\n| 401 | Not authorized | Token inválido |"
+					},
+					"response": [
+						{
+							"name": "Update Comment",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"Comment description updated\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/comment/597b3902-4789-4fd8-b297-70cf474d81c7",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"comment",
+										"597b3902-4789-4fd8-b297-70cf474d81c7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "137"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"89-Ki+U3L+GB0K0jmXe/c/ju4kg8Xc\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Jul 2022 05:54:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"597b3902-4789-4fd8-b297-70cf474d81c7\",\n    \"description\": \"Comment description updated\",\n    \"userId\": \"f8dae4c3-9cc6-4b5a-863e-33fac29ffa1a\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTcwMDAzMjksImV4cCI6MTY1NzA4NjcyOSwic3ViIjoiZjhkYWU0YzMtOWNjNi00YjVhLTg2M2UtMzNmYWMyOWZmYTFhIn0.8VEY3SRuGwTNhIz5rmWW3JDHy3LAggBHrOyqgGfQiYQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/comment/597b3902-4789-4fd8-b297-70cf474d81c7",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"comment",
+								"597b3902-4789-4fd8-b297-70cf474d81c7"
+							]
+						},
+						"description": "Rota utilizada para a deleção de um comentário, enviando o id do comentário na URL.\n\n**Precisa estar autenticado**\n\n| **Status Code** | **Mensagem** | **Significado** |\n| --- | --- | --- |\n| 204 |  | Comentário apagado com sucesso |\n| 400 | Validation Fails | O id do post esta inválido |\n| 400 | Comment not found | Comentário não encontrado |\n| 401 | Not authorized | Token inválido |"
+					},
+					"response": [
+						{
+							"name": "Delete Comment",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/comment/597b3902-4789-4fd8-b297-70cf474d81c7",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"comment",
+										"597b3902-4789-4fd8-b297-70cf474d81c7"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Jul 2022 05:55:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Show Comment",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/comment/8dfd0bbb-8f69-4180-865e-eae26e0e6c7e",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"comment",
+								"8dfd0bbb-8f69-4180-865e-eae26e0e6c7e"
+							]
+						},
+						"description": "Rota utilizada para exibir as informações de um comentário em especifico, passando o id do comentário na URL.\n\n| **Status Code** | **Mensagem** | **Significado** |\n| --- | --- | --- |\n| 200 | id, description, postId, userId description | Informações do comentario solicitado |\n| 400 | Validation Fails | O Id do usuário, id do post ou a descrição estão inválidos |\n| 400 | Comment not found | Comentário não encontrado |"
+					},
+					"response": [
+						{
+							"name": "Show Comment",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/comment/8dfd0bbb-8f69-4180-865e-eae26e0e6c7e",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"comment",
+										"8dfd0bbb-8f69-4180-865e-eae26e0e6c7e"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "177"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b1-+nKs21Rw1ksjVlPxQSI5K+tKxQ0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Jul 2022 03:44:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"8dfd0bbb-8f69-4180-865e-eae26e0e6c7e\",\n    \"description\": \"Comment description\",\n    \"postId\": \"3cc63e86-4da5-4958-b073-6c177b8e02ff\",\n    \"userId\": \"a4859481-37a3-4877-8753-94c68f13ebde\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Create Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTcwMDAzMjksImV4cCI6MTY1NzA4NjcyOSwic3ViIjoiZjhkYWU0YzMtOWNjNi00YjVhLTg2M2UtMzNmYWMyOWZmYTFhIn0.8VEY3SRuGwTNhIz5rmWW3JDHy3LAggBHrOyqgGfQiYQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Title #1\",\r\n    \"description\": \"Post description\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/post",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"post"
+							]
+						},
+						"description": "Rota utilizada para a criação de um post, enviando o titulo e a descrição no corpo da requisição.\n\n**Precisa estar autenticado**\n\n| **Status Code** | **Mensagem** | **Significado** |\n| --- | --- | --- |\n| 201 | title, description | Post criado com sucesso |\n| 400 | Validation Fails | O titulo ou descrição estão inválidos |"
+					},
+					"response": [
+						{
+							"name": "Create Post",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Title #1\",\r\n    \"description\": \"Post description\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/post",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"post"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35-v9uFPY4tmgA5jmdG2WBh8+iBXi8\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Jul 2022 05:52:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"title\": \"Title #1\",\n    \"description\": \"Post description\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Upload Post Image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTY5NTcwMzksImV4cCI6MTY1NzA0MzQzOSwic3ViIjoiYTQ4NTk0ODEtMzdhMy00ODc3LTg3NTMtOTRjNjhmMTNlYmRlIn0.RXy4LaHwbWi3q3QNGWHK_hQAcXVileNn1X_mvwIPtSw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/helde/OneDrive/Pictures/Screenshots/Captura de Tela (1).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/post/upload/3cc63e86-4da5-4958-b073-6c177b8e02ff",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"post",
+								"upload",
+								"3cc63e86-4da5-4958-b073-6c177b8e02ff"
+							]
+						},
+						"description": "Rota utilizada para o upload de uma imagem de um post existente, enviando a imagem no formato FORM-DATA com o nome **file**.\n\n**Precisa estar autenticado**\n\n| **Status Code** | **Mensagem** | **Significado** |\n| --- | --- | --- |\n| 200 | id, url | Upload realizado com sucesso |\n| 400 | Validation Fails | O titulo ou descrição estão inválidos |\n| 400 | Post not found | Post não encontrado |\n| 401 | Not authorized | Token inválido |"
+					},
+					"response": [
+						{
+							"name": "Upload Post Image",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/Users/helde/OneDrive/Pictures/Screenshots/Captura de Tela (1).png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/post/upload/3cc63e86-4da5-4958-b073-6c177b8e02ff",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"post",
+										"upload",
+										"3cc63e86-4da5-4958-b073-6c177b8e02ff"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "171"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ab-IWrNhnEpFiYbs5PsU8bFoyCA6tw\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Jul 2022 01:33:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"3cc63e86-4da5-4958-b073-6c177b8e02ff\",\n    \"url\": \"https://helder-teste-s3.s3-sa-east-1.amazonaws.com/45617db69b088d04d116e0bebaca163d-Captura%20de%20Tela%20%281%29.png\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTcwMDAzMjksImV4cCI6MTY1NzA4NjcyOSwic3ViIjoiZjhkYWU0YzMtOWNjNi00YjVhLTg2M2UtMzNmYWMyOWZmYTFhIn0.8VEY3SRuGwTNhIz5rmWW3JDHy3LAggBHrOyqgGfQiYQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Title #2\",\r\n    \"description\": \"Post description updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/post/166a3e5f-bab4-46f3-a178-aae920bcabe6",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"post",
+								"166a3e5f-bab4-46f3-a178-aae920bcabe6"
+							]
+						},
+						"description": "Rota utilizada para a atualização de um post, enviando o id do posto na URL e o titulo e a descrição no corpo da requisição.\n\n**Precisa estar autenticado**\n\n| **Status Code** | **Mensagem** | **Significado** |\n| --- | --- | --- |\n| 200 | id, description, title | Update realizado com sucesso |\n| 400 | Validation Fails | O titulo ou descrição estão inválidos |\n| 400 | Post not found | Post não encontrado |\n| 401 | Not authorized | Token inválido |"
+					},
+					"response": [
+						{
+							"name": "Update Post",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Title #2\",\r\n    \"description\": \"Post description updated\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/post/166a3e5f-bab4-46f3-a178-aae920bcabe6",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"post",
+										"166a3e5f-bab4-46f3-a178-aae920bcabe6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "105"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"69-7jMNXR3lCnA8A4/xv40fTBQevzA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Jul 2022 06:05:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"166a3e5f-bab4-46f3-a178-aae920bcabe6\",\n    \"description\": \"Post description updated\",\n    \"title\": \"Title #2\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTcwMDAzMjksImV4cCI6MTY1NzA4NjcyOSwic3ViIjoiZjhkYWU0YzMtOWNjNi00YjVhLTg2M2UtMzNmYWMyOWZmYTFhIn0.8VEY3SRuGwTNhIz5rmWW3JDHy3LAggBHrOyqgGfQiYQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/post/166a3e5f-bab4-46f3-a178-aae920bcabe6",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"post",
+								"166a3e5f-bab4-46f3-a178-aae920bcabe6"
+							]
+						},
+						"description": "Rota utilizada para a deleção de um post enviando o id do post na URL.\n\n**Precisa estar autenticado**\n\n| **Status Code** | **Mensagem** | **Significado** |\n| --- | --- | --- |\n| 204 |  | Post apagado com sucesso |\n| 400 | Validation Fails | O id está inválido |\n| 400 | Post not found | Post não encontrado |\n| 401 | Not authorized | Token inválido |"
+					},
+					"response": [
+						{
+							"name": "Delete Post",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Title #12\",\r\n    \"description\": \"Post description 12\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/post/166a3e5f-bab4-46f3-a178-aae920bcabe6",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"post",
+										"166a3e5f-bab4-46f3-a178-aae920bcabe6"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "29"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d-wkkwGiRO46wTALNVLCuw76bqaqM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Jul 2022 06:11:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"mensagem\": \"Not authorized\"\n}"
+						},
+						{
+							"name": "Delete Post",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/post/166a3e5f-bab4-46f3-a178-aae920bcabe6",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"post",
+										"166a3e5f-bab4-46f3-a178-aae920bcabe6"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Jul 2022 06:12:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Show Post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/post/166a3e5f-bab4-46f3-a178-aae920bcabe6",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"post",
+								"166a3e5f-bab4-46f3-a178-aae920bcabe6"
+							]
+						},
+						"description": "Rota que exibe as informações de um comentário em post em especifico, enviando o id do post na URL.\n\n| **Status Code** | **Mensagem** | **Significado** |\n| --- | --- | --- |\n| 200 | id, userId, description, title | Informações do post solicitado |\n| 400 | Validation Fails | O id está inválido |\n| 400 | Post not found | Post não encontrado |"
+					},
+					"response": [
+						{
+							"name": "Show Post",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/post/166a3e5f-bab4-46f3-a178-aae920bcabe6",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"post",
+										"166a3e5f-bab4-46f3-a178-aae920bcabe6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "153"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"99-Vlez1J7kSflNRa3C0mynNXlaDWc\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Jul 2022 06:07:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"166a3e5f-bab4-46f3-a178-aae920bcabe6\",\n    \"userId\": \"f8dae4c3-9cc6-4b5a-863e-33fac29ffa1a\",\n    \"description\": \"Post description updated\",\n    \"title\": \"Title #2\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Report",
+			"item": [
+				{
+					"name": "Post Report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/report/post",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"report",
+								"post"
+							]
+						},
+						"description": "Rota utilizada para gerar um relatório de todos os posts, informando o titulo e a quantidade de comentários.\n\n| **Status Code** | **Mensagem** | **Significado** |\n| --- | --- | --- |\n| 200 | report | Relatório gerado com sucesso |"
+					},
+					"response": [
+						{
+							"name": "Post Report",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/report/post",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"report",
+										"post"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "176"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b0-smkk24PFy8iaiB5Y1XXUyLCoX3Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Jul 2022 06:19:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"report\": [\n        {\n            \"title\": \"Title #1\",\n            \"commentariesNum\": 4\n        },\n        {\n            \"title\": \"Title #3\",\n            \"commentariesNum\": 0\n        },\n        {\n            \"title\": \"Title #2\",\n            \"commentariesNum\": 2\n        },\n        {\n            \"title\": \"Title #4\",\n            \"commentariesNum\": 1\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"john\",\r\n    \"email\": \"j@mail.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						},
+						"description": "Rota utilizada para realizar a criação de um usuário, enviando o nome, e-mail e senha no corpo da requisição.\n\n| **Status Code** | **Mensagem** | **Significado** |\n| --- | --- | --- |\n| 201 | name, email | Usuário criado com sucesso |\n| 400 | Validation Fails | O titulo ou descrição estão inválidos |\n| 400 | This user already exists | Este usuário já existe |"
+					},
+					"response": [
+						{
+							"name": "Create User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"anna\",\r\n    \"email\": \"anna@mail.com\",\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"27-v5banh+yAwbH1Vn+doj+4bZ98bs\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Jul 2022 05:50:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"anna\",\n    \"email\": \"anna@mail.com\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTcwMDAzMjksImV4cCI6MTY1NzA4NjcyOSwic3ViIjoiZjhkYWU0YzMtOWNjNi00YjVhLTg2M2UtMzNmYWMyOWZmYTFhIn0.8VEY3SRuGwTNhIz5rmWW3JDHy3LAggBHrOyqgGfQiYQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Anna Updated\",\r\n    \"email\": \"anna@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/f8dae4c3-9cc6-4b5a-863e-33fac29ffa1a",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"f8dae4c3-9cc6-4b5a-863e-33fac29ffa1a"
+							]
+						},
+						"description": "Rota utilizada para atualizar um usuário, enviando o id do usuário na URL e o nome e o e-mail no corpo da requisição.\n\n**Precisa estar autenticado**\n\n| **Status Code** | **Mensagem** | **Significado** |\n| --- | --- | --- |\n| 201 | name, email | Usuário criado com sucesso |\n| 400 | Validation Fails | O titulo ou descrição estão inválidos |\n| 400 | User not found | Usuário não encontrado |\n| 401 | Not authorized | Token inválido |"
+					},
+					"response": [
+						{
+							"name": "Update User",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Anna Updated\",\r\n    \"email\": \"anna@mail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user/f8dae4c3-9cc6-4b5a-863e-33fac29ffa1a",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"f8dae4c3-9cc6-4b5a-863e-33fac29ffa1a"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "91"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5b-7zgI8WctSOIhYZJXHdZFoI4rqZM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Jul 2022 06:30:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"f8dae4c3-9cc6-4b5a-863e-33fac29ffa1a\",\n    \"email\": \"anna@mail.com\",\n    \"name\": \"Anna Updated\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \" \",\r\n    \"email\": \"another@2ail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/8e724689-f2c5-4ef5-b537-66f4ce2805fa",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"8e724689-f2c5-4ef5-b537-66f4ce2805fa"
+							]
+						},
+						"description": "Rota utilizada para a deleção de um usuário, enviando o id do usuário na URL.\n\n**Precisa estar autenticado**\n\n| **Status Code** | **Mensagem** | **Significado** |\n| --- | --- | --- |\n| 204 |  | Usuário deletado com sucesso |\n| 400 | Validation Fails | O titulo ou descrição estão inválidos |\n| 400 | User not found | Usuário não encontrado |\n| 401 | Not authorized | Token inválido |"
+					},
+					"response": []
+				},
+				{
+					"name": "List Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Rota utilizada para listar os usuários cadastrados.\n\n| **Status Code** | **Mensagem** | **Significado** |\n| --- | --- | --- |\n| 200 | name, email | Listagem dos usuários cadastrados gerada com sucesso |"
+					},
+					"response": [
+						{
+							"name": "List Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31-CGUhi5846SCryBEVjqvUY7T6USA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Jul 2022 06:32:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"name\": \"Anna Updated\",\n        \"email\": \"anna@mail.com\"\n    }\n]"
+						}
+					]
+				}
+			]
+		}
+	]
+}
