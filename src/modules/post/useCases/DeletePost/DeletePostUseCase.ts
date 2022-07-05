@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../util/AppError';
+import { deleteImageFromS3 } from '../../../../util/deleteImageFromS3';
 import { IPostRepository } from '../../repository/interface/IPostRepository';
 
 interface IDeletePostParams {
@@ -22,6 +23,8 @@ class DeletePostUseCase {
     if (postExists.userId !== userId) throw new AppError('Not authorized', 401);
 
     const deleted = await this.postRepository.delete(id);
+
+    if (postExists?.key) deleteImageFromS3(postExists.key)
 
     return deleted;
   }

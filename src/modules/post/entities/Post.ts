@@ -23,6 +23,9 @@ class Post {
   description: string;
 
   @Column()
+  key?: string;
+
+  @Column()
   url?: string;
 }
 
