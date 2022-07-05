@@ -45,6 +45,7 @@
   
   - O Projeto foi desenvolvido utilizando o TypeScript que busca melhorar a busca de erros e bugs dentro do código, além de melhorar a consistência e escabilidade do mesmo. 
   - Banco de dados utilizado: *PostgreSQL* 
+  - Dentro do projeto existe um arquivo de documentação das APIs desenvolvido no Postman  
   
  - dependencies  
     ``aws-sdk``:  Biblioteca com os drivers da aws para facilitar a utilização dos seus serviços   
