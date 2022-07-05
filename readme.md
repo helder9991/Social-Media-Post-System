@@ -1,9 +1,9 @@
 # Versões dos softwares utilizados:  
-  node v16.14.2 
-  yarn 1.22.18
-  npm v8.5.0 
-  docker 20.10.14
-  docker-compose 1.29.2
+  - node v16.14.2  
+  - yarn 1.22.18  
+  - npm v8.5.0  
+  - docker 20.10.14  
+  - docker-compose 1.29.2  
   
 # Como utilizar
 1 -  Crie o banco de dados com o nome ``social`` ou execute o comando ``docker-compose up -d`` na pasta raiz do projeto  
